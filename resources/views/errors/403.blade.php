@@ -1,3 +1,12 @@
+{{-- 繼承主樣板的型態 --}}
+{{-- @extends('layouts.app') 
+@section('content')
+<h1>403 Forbidden.</h1>
+<p>您沒有權限可以執行目前的動作喔！</p>
+@endsection --}}
+
+
+{{-- LARAVEL內建的403 --}}
 <html>
   <head>
     <title>{{ config('backpack.base.project_name') }} Error 403</title>
@@ -44,12 +53,12 @@
     <div class="container">
       <div class="content">
         <div class="title">403</div>
-        <div class="quote">Forbidden.</div>
+        <div class="quote">您沒有權限可以執行目前的動作喔！</div>
         <div class="explanation">
           <br>
           <small>
             <?php
-              $default_error_message = "Please return to <a href='".url('')."'>our homepage</a>.";
+              $default_error_message = "<a href='".url('')."'>返回首頁</a>.";
             ?>
             {!! isset($exception)? ($exception->getMessage()?$exception->getMessage():$default_error_message): $default_error_message !!}
          </small>

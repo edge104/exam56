@@ -29,7 +29,7 @@
     此處只有在此視圖﹙頁面﹚才有作用
     以(at)stop結尾，等同(at)endsection
 -->
-@section('my_menu')
+{{-- @section('my_menu')
     <li><a class="nav-link" href="#">自訂選項</a></li>
     @parent
-@stop
+@stop --}}

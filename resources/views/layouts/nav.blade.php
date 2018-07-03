@@ -36,11 +36,33 @@
                     放入一個登入後才看得到的自訂選項home 
                     以(at)show結尾
                 -->
-                @section('my_menu')
+                {{-- @section('my_menu')
                     <li><a class="nav-link" href="/home">{{ __('Home') }}</a></li>
+                @show --}}
+
+
+                <!--
+                    加入管理按鈕，使用角色判別
+                -->
+                {{-- @section('admin_item')
+                    @role('管理員')
+                        <li><a class="nav-link" href="/admin">{{ __('Admin') }}</a></li>
+                    @endrole
+                @show --}}
+
+
+                <!--
+                    加入管理按鈕，使用權限判別﹙比較準確，因為角色不見得有權限﹚
+                -->
+                @section('admin_item')
+                    @can('後台管理')
+                        <li><a class="nav-link" href="/admin">{{ __('Admin') }}</a></li>
+                    @endcan
                 @show
 
 
+
+                
                 <li class="nav-item dropdown">
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false" v-pre>
