@@ -53,10 +53,15 @@
 
                 <!--
                     加入管理按鈕，使用權限判別﹙比較準確，因為角色不見得有權限﹚
+                    使用section是保留區塊在子樣板有可以被變動/替代的空間
                 -->
                 @section('admin_item')
                     @can('後台管理')
                         <li><a class="nav-link" href="/admin">{{ __('Admin') }}</a></li>
+                    @endcan
+                    
+                    @can('建立測驗')
+                        <li><a class="nav-link" href="/exam/create">{{ __('Create Exam') }}</a></li>
                     @endcan
                 @show
 

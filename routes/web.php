@@ -25,3 +25,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//透過路由結合視圖新增一個頁面
+//設定完後，到resources/views新增目錄exam，底下新增檔案create.blade.php
+Route::get('/exam/create', function () {
+    return view('exam.create');
+})->name('exam.create');
