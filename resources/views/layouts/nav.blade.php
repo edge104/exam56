@@ -16,7 +16,9 @@
 
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
+
                 <!-- Authentication Links -->
+                <!-- 來賓選項 -->
                 @guest
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -24,7 +26,21 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                 </li>
+
+                {{-- 會員選項 --}}
                 @else
+
+
+                <!-- 
+                    自訂scetion並直接塞入內容，
+                    放入一個登入後才看得到的自訂選項home 
+                    以(at)show結尾
+                -->
+                @section('my_menu')
+                    <li><a class="nav-link" href="/home">{{ __('Home') }}</a></li>
+                @show
+
+
                 <li class="nav-item dropdown">
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false" v-pre>
