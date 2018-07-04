@@ -34,6 +34,17 @@
                             ->showAsRow() }}
                 {{ bs()->closeForm() }}
 
+                {{-- 錯誤訊息集中起來 --}}
+                @if (count($errors) > 0)
+                    @component('bs::alert', ['type' => 'danger col-lg-12', 'animated' => true, 'dismissible' => true, 'data' => ['alert-id' => 40, 'context' => 'sample-code']])
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    @endcomponent
+                @endif                
+
             @else
                 @component('bs::alert', ['type' => 'danger', 'animated' => true, 'dismissible' => true, 'data' => ['alert-id' => 40, 'context' => 'sample-code']])
                     @slot('heading')
