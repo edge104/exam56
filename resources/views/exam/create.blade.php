@@ -14,7 +14,7 @@
                     {{ bs()->formGroup()
                             ->label('測驗標題', false, 'text-sm-right')
                             ->control(bs()->text('title')->placeholder('請填寫'))
-                            ->helpText('&nbsp;')
+                            ->helpText('')
                             ->showAsRow() }}<!--單行顯示-->
                     
                     {{ bs()->formGroup()
@@ -22,7 +22,7 @@
                             ->control(bs()->radioGroup('enable', [1 => '啟用', 0 => '關閉'])
                                         ->selectedOption(1)
                                         ->inline())
-                            ->helpText('&nbsp;')
+                            ->helpText('')
                             ->showAsRow() }}
 
                     <!--隱藏欄位，紀錄使用者id-->

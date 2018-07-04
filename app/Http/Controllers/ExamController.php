@@ -39,6 +39,11 @@ class ExamController extends Controller
         //寫法3
         //直接用$request->all，將exam.php裡$fillable定義的通通寫入
         //換句話說就是在這裡指示全部寫入，至於什麼是全部，從model裡面用$fillable去定義
+        
+        //驗證
+        $this->validate($request, [
+            'title' => 'required|min:2|max:191',
+        ]);        
         Exam::create($request->all());
 
         //寫法2
