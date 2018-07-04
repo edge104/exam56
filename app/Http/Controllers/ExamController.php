@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exam;
+use App\Http\Requests\ExamRequest;
 use Illuminate\Http\Request;
 
 class ExamController extends Controller
@@ -34,20 +35,13 @@ class ExamController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ExamRequest $request)
     {
         //寫法3
         //直接用$request->all，將exam.php裡$fillable定義的通通寫入
         //換句話說就是在這裡指示全部寫入，至於什麼是全部，從model裡面用$fillable去定義
 
         //驗證
-        $this->validate($request, [
-            'title' => 'required|min:2|max:191',
-        ], [
-            'required' => '「:attribute」為必填欄位',
-            'min'      => '「:attribute」至少要 :min 個字',
-            'max'      => '「:attribute」最多只能 :max 個字',
-        ]);
         Exam::create($request->all());
 
         //寫法2
