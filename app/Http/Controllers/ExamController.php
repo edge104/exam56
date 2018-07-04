@@ -11,11 +11,12 @@ class ExamController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Responser
      */
     public function index()
     {
-        return view('exam.index');
+        $exams = Exam::all();
+        return view('exam.index', compact('exams'));
     }
 
     /**

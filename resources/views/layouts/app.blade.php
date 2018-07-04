@@ -10,6 +10,12 @@
         <main class="py-4">
             <div class="container">
                 @yield('content')
+
+                @if(session('status'))
+                    @component('bs::alert', ['type' => 'info'])
+                        {{ session('status') }}
+                    @endcomponent
+                @endif                
             </div>
         </main>
     </div>
