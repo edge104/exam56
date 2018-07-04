@@ -36,11 +36,20 @@ class ExamController extends Controller
      */
     public function store(Request $request)
     {
-        $exam          = new Exam;
-        $exam->title   = $request->title;
-        $exam->user_id = $request->user_id;
-        $exam->enable  = $request->enable;
-        $exam->save();
+        //寫法2
+        //批量賦值寫入，要搭裡Exam.php裡的模型
+        Exam::create([
+            'title'   => $request->title,
+            'user_id' => $request->user_id,
+            'enable'  => $request->enable,
+        ]);
+        
+        // 寫法1
+        // $exam          = new Exam;
+        // $exam->title   = $request->title;
+        // $exam->user_id = $request->user_id;
+        // $exam->enable  = $request->enable;
+        // $exam->save();
         return redirect()->route('exam.index');
     }
 
