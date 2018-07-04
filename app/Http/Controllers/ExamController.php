@@ -14,7 +14,7 @@ class ExamController extends Controller
      */
     public function index()
     {
-        return view('welcome');
+        return view('home');
     }
 
     /**
@@ -36,14 +36,19 @@ class ExamController extends Controller
      */
     public function store(Request $request)
     {
+        //寫法3
+        //直接用$request->all，將exam.php裡$fillable定義的通通寫入
+        //換句話說就是在這裡指示全部寫入，至於什麼是全部，從model裡面用$fillable去定義
+        Exam::create($request->all());
+
         //寫法2
-        //批量賦值寫入，要搭裡Exam.php裡的模型
-        Exam::create([
-            'title'   => $request->title,
-            'user_id' => $request->user_id,
-            'enable'  => $request->enable,
-        ]);
-        
+        //批量賦值寫入，要搭裡app/Exam.php裡的模型
+        // Exam::create([
+        //     'title'   => $request->title,
+        //     'user_id' => $request->user_id,
+        //     'enable'  => $request->enable,
+        // ]);
+
         // 寫法1
         // $exam          = new Exam;
         // $exam->title   = $request->title;
