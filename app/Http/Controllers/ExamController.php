@@ -16,11 +16,11 @@ class ExamController extends Controller
     public function index()
     {
         $exams = Exam::where('enable', 1)
-                //->where('created_at', '>', '2018-05-30')
-                ->orderBy('created_at', 'desc')
-                ->take(10)
-                ->paginate(2);
-                //->get();有分頁不需get()
+        //->where('created_at', '>', '2018-05-30')
+            ->orderBy('created_at', 'desc')
+            ->take(10)
+            ->paginate(2);
+        //->get();有分頁不需get()
         return view('exam.index', compact('exams'));
     }
 
@@ -73,9 +73,8 @@ class ExamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Exam $exam)
     {
-        $exam = Exam::find($id);
         return view('exam.show', compact('exam'));
     }
 

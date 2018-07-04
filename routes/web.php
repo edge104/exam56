@@ -35,7 +35,7 @@ Route::get('/home', 'ExamController@index')->name('home.index');
 Route::get('/exam', 'ExamController@index')->name('exam.index');
 Route::get('/exam/create', 'ExamController@create')->name('exam.create');
 Route::post('/exam', 'ExamController@store')->name('exam.store');
-Route::get('/exam/{id}', 'ExamController@show')->name('exam.show');
+Route::get('/exam/{exam}', 'ExamController@show')->name('exam.show');
 
 //day1寫法
 //透過路由結合視圖新增一個頁面
