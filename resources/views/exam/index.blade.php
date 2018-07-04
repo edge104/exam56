@@ -6,6 +6,7 @@
     <h1 class="text-center">{{ __('All Exam') }}</h1>
 
     <div class="list-group col-lg-10 offset-lg-1">
+        {{-- 用forelse必定要搭配@empty不然會報錯 --}}
         @forelse($exams as $exam)
 
         <a href="/exam/{{ $exam->id }}" class="list-group-item list-group-item-action list-group-item-secondary">
