@@ -3,7 +3,8 @@
 
 <!--塞值給主樣板裡的content scetion-->
 @section('content')
-    <h1 class="text-center">{{ __('All Exam') }}</h1>
+    <h1 class="text-center mb-0">{{ __('All Exam') }}</h1>
+    <p class="text-center text-muted">（共 {{$exams->total()}} 筆資料）</p>
 
     <div class="list-group col-lg-10 offset-lg-1">
 

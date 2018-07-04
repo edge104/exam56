@@ -11,6 +11,13 @@
 |
  */
 
+/*
+宣告id格式只可以是數字，
+套用到所有路由
+﹙以免exam/create的create也被當成id﹚
+ */
+Route::pattern('id', '[0-9]+');
+
 Route::get('/', 'ExamController@index')->name('exam');
 
 //基本動作：傳參數給view﹙視圖﹚
@@ -24,11 +31,11 @@ Auth::routes();
 
 Route::get('/home', 'ExamController@index')->name('home.index');
 
-
 //mvc寫法，路由透過控制器呼叫視圖，搭配app/HTTP/Controllers/ExamController.php
 Route::get('/exam', 'ExamController@index')->name('exam.index');
 Route::get('/exam/create', 'ExamController@create')->name('exam.create');
 Route::post('/exam', 'ExamController@store')->name('exam.store');
+Route::get('/exam/{id}', 'ExamController@show')->name('exam.show');
 
 //day1寫法
 //透過路由結合視圖新增一個頁面
