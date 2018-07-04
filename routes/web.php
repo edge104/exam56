@@ -11,26 +11,24 @@
 |
  */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'ExamController@index')->name('exam');
 
 //基本動作：傳參數給view﹙視圖﹚
-Route::get('/', function () {
-    $name = 'edge';
-    $say  = 'Hello!';
-    return view('welcome', compact('name', 'say'));
-});
+// Route::get('/', function () {
+//     $name = 'edge';
+//     $say  = 'Hello!';
+//     return view('welcome', compact('name', 'say'));
+// });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'ExamController@index')->name('home.index');
+
 
 //mvc寫法，路由透過控制器呼叫視圖，搭配app/HTTP/Controllers/ExamController.php
 Route::get('/exam', 'ExamController@index')->name('exam.index');
 Route::get('/exam/create', 'ExamController@create')->name('exam.create');
 Route::post('/exam', 'ExamController@store')->name('exam.store');
-
 
 //day1寫法
 //透過路由結合視圖新增一個頁面
