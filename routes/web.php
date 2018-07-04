@@ -26,8 +26,13 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+//mvc寫法，路由透過控制器呼叫視圖，搭配app/HTTP/Controllers/ExamController.php
+Route::get('/exam', 'ExamController@index')->name('exam.index');
+Route::get('/exam/create', 'ExamController@create')->name('exam.create');
+
+//day1寫法
 //透過路由結合視圖新增一個頁面
 //設定完後，到resources/views新增目錄exam，底下新增檔案create.blade.php
-Route::get('/exam/create', function () {
-    return view('exam.create');
-})->name('exam.create');
+// Route::get('/exam/create', function () {
+//     return view('exam.create');
+// })->name('exam.create');
