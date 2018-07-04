@@ -19,7 +19,8 @@ class ExamController extends Controller
                 //->where('created_at', '>', '2018-05-30')
                 ->orderBy('created_at', 'desc')
                 ->take(10)
-                ->get();
+                ->paginate(2);
+                //->get();有分頁不需get()
         return view('exam.index', compact('exams'));
     }
 
