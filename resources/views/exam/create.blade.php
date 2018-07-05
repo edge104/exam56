@@ -25,7 +25,9 @@
                     {{ bs()->formGroup()
                             ->label('測驗狀態', false, 'text-sm-right')
                             ->control(bs()->radioGroup('enable', [1 => '啟用', 0 => '關閉'])
-                                        ->selectedOption(1)
+                                        // 用三元次來判斷有無exam值存在，有給給值，沒就直接給1
+                                        ->selectedOption(isset($exam)?$exam->enable:1)
+                                        // ->selectedOption(1)
                                         ->inline())
                             ->helpText('')
                             ->showAsRow() }}
