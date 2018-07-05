@@ -76,7 +76,7 @@ class ExamController extends Controller
      */
     public function show(Exam $exam)
     {
-        $topics = Topic::all();
+        $topics = Topic::where('exam_id', $exam->id)->get();
         return view('exam.show', compact('exam', 'topics'));
     }
 
