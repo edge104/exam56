@@ -4,6 +4,9 @@
 <!--塞值給主樣板裡的content scetion-->
 @section('content')
     <h1 class="text-center">{{$exam->title}}</h1>
+    @can('建立測驗')
+        <a href="{{route('exam.edit', $exam->id)}}" class="btn btn-warning">編輯</a>
+    @endcan    
 
     @can('建立測驗')
         {{ bs()->openForm('post', '/topic') }}
@@ -40,30 +43,33 @@
     @endcan
 
     <hr>
-
-    <dl class="col-lg-8 offset-lg-2 my-5">
-        @forelse ($exam->alltopics as $key => $topic)
-            <dt>
-                <h3>
-                @can('建立測驗')
-                    （{{$topic->ans}}）
-                @endcan
-                {{ bs()->badge()->text($key+1) }}
-                {{$topic->topic}}
-                </h3>
-            </dt>
-            <dd>
-                {{ bs()->radioGroup("ans[$topic->id]", [
-                        1=>"<span class='opt'>&#10102; $topic->opt1</span>",
-                        2=>"<span class='opt'>&#10103; $topic->opt2</span>",
-                        3=>"<span class='opt'>&#10104; $topic->opt3</span>",
-                        4=>"<span class='opt'>&#10105; $topic->opt4</span>"
-                    ])->inline()->addRadioClass(['mx-3']) }}
-            </dd>
-        @empty
-            <div class="alert alert-danger">尚無任何題目</div>
-        @endforelse
-    </dl>    
+    
+    {{-- 有登入有id，有id才看得到題目 --}}
+    @if(Auth::id())
+        <dl class="col-lg-8 offset-lg-2 my-5">
+            @forelse ($exam->alltopics as $key => $topic)
+                <dt>
+                    <h3>
+                    @can('建立測驗')
+                        （{{$topic->ans}}）
+                    @endcan
+                    {{ bs()->badge()->text($key+1) }}
+                    {{$topic->topic}}
+                    </h3>
+                </dt>
+                <dd>
+                    {{ bs()->radioGroup("ans[$topic->id]", [
+                            1=>"<span class='opt'>&#10102; $topic->opt1</span>",
+                            2=>"<span class='opt'>&#10103; $topic->opt2</span>",
+                            3=>"<span class='opt'>&#10104; $topic->opt3</span>",
+                            4=>"<span class='opt'>&#10105; $topic->opt4</span>"
+                        ])->inline()->addRadioClass(['mx-3']) }}
+                </dd>
+            @empty
+                <div class="alert alert-danger">尚無任何題目</div>
+            @endforelse
+        </dl> 
+    @endif   
 
     <div class="col-lg-10 offset-lg-1 small text-center text-muted">
         發佈於 {{$exam->created_at->format("Y年m月d日 H:i:s")}} / 最後更新： {{$exam->updated_at->format("Y年m月d日 H:i:s")}}

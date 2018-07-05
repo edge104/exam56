@@ -16,7 +16,7 @@
 套用到所有路由
 ﹙以免exam/create的create也被當成id﹚
  */
-Route::pattern('id', '[0-9]+');
+Route::pattern('exam', '[0-9]+');
 
 Route::get('/', 'ExamController@index')->name('exam');
 
@@ -39,6 +39,8 @@ Route::get('/exam', 'ExamController@index')->name('exam.index');
 Route::get('/exam/create', 'ExamController@create')->name('exam.create');
 Route::post('/exam', 'ExamController@store')->name('exam.store');
 Route::get('/exam/{exam}', 'ExamController@show')->name('exam.show');
+Route::get('/exam/{exam}/edit', 'ExamController@edit')->name('exam.edit');
+
 //
 //
 // 題目
