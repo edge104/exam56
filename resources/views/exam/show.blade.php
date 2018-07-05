@@ -42,7 +42,7 @@
     <hr>
 
     <dl class="col-lg-8 offset-lg-2 my-5">
-        @forelse ($topics as $key => $topic)
+        @forelse ($exam->alltopics as $key => $topic)
             <dt>
                 <h3>
                 @can('建立測驗')

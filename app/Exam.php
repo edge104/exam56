@@ -10,4 +10,16 @@ class Exam extends Model
     protected $fillable = [
         'title', 'user_id', 'enable',
     ];
+
+    // protected $casts = [
+    //     'enable' => 'boolean',
+    // ];
+
+
+    //在Exam模型裡面和Topic模型互相建立關聯
+    public function alltopics()
+    {
+        // Exam模型跟據此線索把題目一起撈進來
+        return $this->hasMany('App\Topic');
+    }
 }
