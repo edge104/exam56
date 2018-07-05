@@ -21,4 +21,10 @@ class Exam extends Model
         // Exam模型跟據此線索把題目一起撈進來
         return $this->hasMany('App\Topic');
     }
+
+    //與Test模型關連
+    public function tests()
+    {
+        return $this->hasMany('App\Test');
+    }
 }
