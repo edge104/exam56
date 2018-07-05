@@ -89,9 +89,7 @@ class ExamController extends Controller
      */
     public function edit(Exam $exam)
     {
-        $method = 'patch';
-        $action = "/exam/" . $exam->id;
-        return view('exam.create', compact('exam', 'method', 'action'));
+        return view('exam.create', compact('exam'));
     }
 
     /**

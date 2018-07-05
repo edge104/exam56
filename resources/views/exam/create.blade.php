@@ -8,8 +8,13 @@
         <div class="col-2">&nbsp;</div>
         <div class="col-8">
             @can('建立測驗')
-                {{-- {{ bs()->openForm('post', '/exam') }} --}}
-                {{ bs()->openForm($method, $action, ['model' => $exam]) }}
+
+                    {{-- 有測驗id存在就跑修改的form，反之則新增 --}}
+                    @if(isset($exam->id))
+                        {{ bs()->openForm('patch', "/exam/{$exam->id}" , [ 'model' => $exam]) }}
+                    @else
+                        {{ bs()->openForm('post', '/exam') }}
+                    @endif
 
                     {{ bs()->formGroup()
                             ->label('測驗標題', false, 'text-sm-right')
