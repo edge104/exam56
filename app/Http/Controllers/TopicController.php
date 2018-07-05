@@ -85,6 +85,7 @@ class TopicController extends Controller
     public function destroy(Topic $topic)
     {
         $topic->delete();
-        return redirect()->route('exam.show', $topic->exam_id);
+        // ↓改用sweetAlert用node.js方式刪除後location.reload，這裡不需return
+        // return redirect()->route('exam.show', $topic->exam_id);
     }
 }

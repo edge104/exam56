@@ -62,12 +62,8 @@
                     <h3>
                     @can('建立測驗')
                         
-                        {{-- 刪除動作必需要搭form的post --}}
-                        <form action="{{route('topic.destroy', $topic->id)}}"  method="post" style="display:inline">
-                            @csrf {{-- 避免被遠處透過連結直接刪除 --}}
-                            @method('delete')
-                            <button type="submit" class="btn btn-sm btn-danger">刪除</button>
-                        </form>
+                        {{-- 透過sweetAlert效果經確認後才刪除 --}}
+                        <button type="button" class="btn btn-danger btn-sm btn-del-topic" data-id="{{ $topic->id }}">刪除</button>
 
                         <a href="{{route('topic.edit', $topic->id)}}" class="btn btn-sm btn-warning">編輯</a>
                         （{{$topic->ans}}）
@@ -93,4 +89,36 @@
     <div class="col-lg-10 offset-lg-1 small text-center text-muted">
         發佈於 {{$exam->created_at->format("Y年m月d日 H:i:s")}} / 最後更新： {{$exam->updated_at->format("Y年m月d日 H:i:s")}}
     </div>
+@endsection
+
+
+{{-- 把script語法塞進app.blade.php的洞裡 --}}
+@section('scriptsAfterJs')
+<script>
+    $(document).ready(function() {
+            // 刪除按鈕點擊事件
+            $('.btn-del-topic').click(function() {
+                // 獲取按鈕上 data-id 屬性的值，也就是編號
+                var id = $(this).data('id');
+                // 調用 sweetalert
+                swal({
+                    title: "確定要刪除題目嗎？",
+                    text: "刪除後該題目就消失救不回來囉！",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "是！含淚刪除！",
+                    cancelButtonText: "不...別刪",
+                }).then((result) => {
+                    if (result.value) {
+                        swal("OK！刪掉題目惹！", "該題目已經隨風而逝了...", "success");
+                        // 調用刪除介面，用 id 來拼接出請求的 url
+                        axios.delete('/topic/' + id).then(function () {
+                            location.reload();
+                        });
+                    }
+                });
+            });
+        });
+</script>
 @endsection
