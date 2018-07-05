@@ -6,11 +6,20 @@
     <h1 class="text-center">{{$exam->title}}
     @can('建立測驗')
         <a href="{{route('exam.edit', $exam->id)}}" class="btn btn-warning">編輯</a>
+        <form action="{{route('exam.destroy', $exam->id)}}" method="post" style="display:inline">
+            @csrf {{-- 避免被遠處透過連結直接刪除 --}} @method('delete')
+            <button type="submit" class="btn btn-danger">刪除</button>
+        </form>
     @endcan 
     </h1>   
 
     @can('建立測驗')
-        {{ bs()->openForm('post', '/topic') }}
+            {{-- 有測驗id存在就跑修改的form，反之則新增 --}}
+            @if(isset($topic->id))
+                {{ bs()->openForm('patch', "/topic/{$topic->id}" , [ 'model' => $topic]) }}
+            @else
+                {{ bs()->openForm('post', '/topic') }}
+            @endif
             {{ bs()->formGroup()
                     ->label('題目內容', false, 'text-sm-right')
                     ->control(bs()->textarea('topic')->placeholder('請輸入題目內容'))
@@ -48,10 +57,19 @@
     {{-- 有登入有id，有id才看得到題目 --}}
     @if(Auth::id())
         <dl class="col-lg-8 offset-lg-2 my-5">
-            @forelse ($exam->alltopics as $key => $topic)
+            @forelse ($exam->topics as $key => $topic)
                 <dt>
                     <h3>
                     @can('建立測驗')
+                        
+                        {{-- 刪除動作必需要搭form的post --}}
+                        <form action="{{route('topic.destroy', $topic->id)}}"  method="post" style="display:inline">
+                            @csrf {{-- 避免被遠處透過連結直接刪除 --}}
+                            @method('delete')
+                            <button type="submit" class="btn btn-sm btn-danger">刪除</button>
+                        </form>
+
+                        <a href="{{route('topic.edit', $topic->id)}}" class="btn btn-sm btn-warning">編輯</a>
                         （{{$topic->ans}}）
                     @endcan
                     {{ bs()->badge()->text($key+1) }}

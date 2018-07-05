@@ -18,6 +18,7 @@
 後來因為做了路由模型綁定，所以id改成exam了
  */
 Route::pattern('exam', '[0-9]+');
+Route::pattern('topic', '[0-9]+');
 
 Route::get('/', 'ExamController@index')->name('exam');
 
@@ -42,11 +43,15 @@ Route::post('/exam', 'ExamController@store')->name('exam.store');
 Route::get('/exam/{exam}', 'ExamController@show')->name('exam.show');
 Route::get('/exam/{exam}/edit', 'ExamController@edit')->name('exam.edit');
 Route::patch('/exam/{exam}', 'ExamController@update')->name('exam.update');
+Route::delete('/exam/{exam}', 'ExamController@destroy')->name('exam.destroy');
 
 //
 //
 // 題目
 Route::post('/topic', 'TopicController@store')->name('topic.store');
+Route::get('/topic/{topic}/edit', 'TopicController@edit')->name('topic.edit');
+Route::patch('/topic/{topic}', 'TopicController@update')->name('topic.update');
+Route::delete('/topic/{topic}', 'TopicController@destroy')->name('topic.destroy');
 
 //day1寫法
 //透過路由結合視圖新增一個頁面

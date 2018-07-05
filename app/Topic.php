@@ -11,7 +11,7 @@ class Topic extends Model
     ];
 
     //在Topic模型裡面和Exam模型互相建立關聯
-    public function these4exam()
+    public function exam()
     {
         // Topic模型跟據此線索把題目送給測驗
         return $this->belongsTo('App\Exam');

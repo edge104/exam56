@@ -6,6 +6,9 @@ use App\Exam;
 use App\Http\Requests\ExamRequest;
 use Illuminate\Http\Request;
 
+// ↓↓取得使用者資料
+use Illuminate\Support\Facades\Auth;
+
 class ExamController extends Controller
 {
     /**
@@ -15,12 +18,18 @@ class ExamController extends Controller
      */
     public function index()
     {
-        $exams = Exam::where('enable', 1)
-        //->where('created_at', '>', '2018-05-30')
-            ->orderBy('created_at', 'desc')
-            ->take(10)
-            ->paginate(2);
-        //->get();有分頁不需get()
+        $user = Auth::user();
+        if ($user and $user->can('建立測驗')) {
+            $exams = Exam::orderBy('created_at', 'desc')
+                ->paginate(5);
+        } else {
+            $exams = Exam::where('enable', 1)
+            //->where('created_at', '>', '2018-05-30')
+                ->orderBy('created_at', 'desc')
+                ->take(10)
+                ->paginate(5);
+            //->get();有分頁不需get()
+        }
         return view('exam.index', compact('exams'));
     }
 
@@ -112,8 +121,9 @@ class ExamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Exam $exam)
     {
-        //
+        $exam->delete();
+        return redirect()->route('home.index');
     }
 }

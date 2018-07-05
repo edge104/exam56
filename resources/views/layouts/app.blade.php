@@ -19,5 +19,8 @@
             </div>
         </main>
     </div>
+
+    {{-- 挖個洞放script --}}
+    @yield('scriptsAfterJs')
 </body>
 </html>

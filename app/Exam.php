@@ -15,9 +15,8 @@ class Exam extends Model
     //     'enable' => 'boolean',
     // ];
 
-
     //在Exam模型裡面和Topic模型互相建立關聯
-    public function alltopics()
+    public function topics()
     {
         // Exam模型跟據此線索把題目一起撈進來
         return $this->hasMany('App\Topic');

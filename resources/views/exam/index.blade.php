@@ -11,8 +11,12 @@
         {{-- 用forelse必定要搭配@empty不然會報錯 --}}
         @forelse($exams as $exam)
 
-        <a href="/exam/{{ $exam->id }}" class="list-group-item list-group-item-action list-group-item-secondary">
-            {{ $exam->created_at->format("Y年m月d日") }} - {{ $exam->title }}
+        <a href="/exam/{{ $exam->id }}" class="list-group-item list-group-item-action list-group-item-light">
+            {{ $exam->created_at->format("Y年m月d日") }} - 
+            @if($exam->enable!=1)
+                {{ bs()->badge()->text('關閉') }}
+            @endif
+            {{ $exam->title }}
         </a>
 
         @empty
