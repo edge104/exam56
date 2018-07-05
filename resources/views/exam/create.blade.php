@@ -8,8 +8,8 @@
         <div class="col-2">&nbsp;</div>
         <div class="col-8">
             @can('建立測驗')
-                {{ bs()->openForm('post', '/exam') }}
-
+                {{-- {{ bs()->openForm('post', '/exam') }} --}}
+                {{ bs()->openForm($method, $action, ['model' => $exam]) }}
 
                     {{ bs()->formGroup()
                             ->label('測驗標題', false, 'text-sm-right')

@@ -87,9 +87,11 @@ class ExamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Exam $exam)
     {
-        //
+        $method = 'patch';
+        $action = "/exam/" . $exam->id;
+        return view('exam.create', compact('exam', 'method', 'action'));
     }
 
     /**

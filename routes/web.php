@@ -15,6 +15,7 @@
 宣告id格式只可以是數字，
 套用到所有路由
 ﹙以免exam/create的create也被當成id﹚
+後來因為做了路由模型綁定，所以id改成exam
  */
 Route::pattern('exam', '[0-9]+');
 

@@ -3,10 +3,11 @@
 
 <!--塞值給主樣板裡的content scetion-->
 @section('content')
-    <h1 class="text-center">{{$exam->title}}</h1>
+    <h1 class="text-center">{{$exam->title}}
     @can('建立測驗')
         <a href="{{route('exam.edit', $exam->id)}}" class="btn btn-warning">編輯</a>
-    @endcan    
+    @endcan 
+    </h1>   
 
     @can('建立測驗')
         {{ bs()->openForm('post', '/topic') }}
