@@ -124,6 +124,7 @@ class ExamController extends Controller
     public function destroy(Exam $exam)
     {
         $exam->delete();
-        return redirect()->route('home.index');
+        // ↓改用sweetAlert用node.js方式刪除後轉向，這裡不需return
+        // return redirect()->route('home.index');
     }
 }
